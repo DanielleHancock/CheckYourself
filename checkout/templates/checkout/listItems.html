@@ -47,16 +47,16 @@ button#b1 {background-color:blue; color:white; border: 2px solid lightblue; font
 		<th>Serial Number</th>
 	</tr>
           
-        {% for item in items %}
+        {% for checkout in checkouts %}
 		<tr>
         <td style="text-align:center">  <button type="button">Check in/out</button>  </td>
-        <td>{{item.category}}</td>
-		<td>{{item.model_number}}</td>
-		<td>{{item.id}}</td>
-		<td>{{item.student}}</td>
-        <td>{{item.dateCheckedOut}}</td>
-        <td>{{item.description}}</td>
-		<td>{{item.serial_number}}</td>
+        <td>{{checkout.item.category}}</td>
+		<td>{{checkout.item.model_number}}</td>
+		<td>{{checkout.item.item_id}}</td>
+		<td>{{checkout.borrower.first_name}} {{checkout.borrower.last_name}}</td>
+        <td>{{checkout.checkout_date}}</td>
+        <td>{{checkout.item.description}}</td>
+		<td>{{checkout.item.serial_number}}</td>
        </tr>
        {% endfor %}
     

@@ -46,4 +46,4 @@ class Checkout(models.Model): #by not specifying a primary key, django will crea
     borrower = models.ForeignKey(User,related_name='borrower',null=True,on_delete=models.SET_NULL)
     authorizer = models.ForeignKey(User,related_name='authorizer',null=True,on_delete=models.SET_NULL)
     checkout_date = models.DateField('checkout date')
-    checkin_date = models.DateField('checkin date')
+    checkin_date = models.DateField('checkin date',null=True,blank=True)

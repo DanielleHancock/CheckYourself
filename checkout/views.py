@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.utils import timezone
-from .models import Item
+from .models import Item, User, Checkout
 
 from django.http import HttpResponse
 # Create your views here.
@@ -10,8 +10,8 @@ def index(request):
     
 
 def items(request):
-    items = Item.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'checkout/listitems.html', {'items': items})
+    checkouts = Checkout.objects.all().order_by('item__category')
+    return render(request, 'checkout/listitems.html', {'checkouts': checkouts})
 #def getItems(request):
     
 def users(request):
