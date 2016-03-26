@@ -10,7 +10,7 @@ def index(request):
     
 
 def items(request):
-    checkouts = Checkout.objects.all().order_by('item__category'.capitalize)
+    checkouts = Checkout.objects.all().order_by('item__category')
     return render(request, 'checkout/listitems.html', {'checkouts': checkouts})
 #def getItems(request):
     
