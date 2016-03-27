@@ -10,10 +10,19 @@ def index(request):
     
 
 def items(request):
-    checkouts = Checkout.objects.all().order_by('item__category')
-    return render(request, 'checkout/listitems.html', {'checkouts': checkouts})
-#def getItems(request):
+    checkouts = {checkout.item.item_id: checkout for checkout in Checkout.objects.filter(checkin_date__isnull=True)}
     
+    items = []
+    for item in Item.objects.all():
+        checkout = checkouts.get(item.item_id)
+        items.append((item,checkout))
+    print("x" for item in items)
+                 
+    """items = Item.objects.all().select_related('checkout').filter(checkout__checkin_date__isnull=False) #Checkout.objects.all().order_by('item__category')"""
+    
+    return render(request, 'checkout/listitems.html', {'items': items})
+
+
 def users(request):
     return HttpResponse("<html><b>This will be the users page")
 
