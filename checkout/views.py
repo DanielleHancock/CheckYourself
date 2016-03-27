@@ -13,7 +13,7 @@ def items(request):
     checkouts = {checkout.item.item_id: checkout for checkout in Checkout.objects.filter(checkin_date__isnull=True)}
     
     items = []
-    for item in Item.objects.all():
+    for item in Item.objects.all().order_by('category'):
         checkout = checkouts.get(item.item_id)
         items.append((item,checkout))
     print("x" for item in items)
