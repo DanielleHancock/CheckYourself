@@ -38,9 +38,9 @@ button#b1 {background-color:blue; color:white; border: 2px solid lightblue; font
 	
 	<tr>       
 		<th>Check in/out</th>
-		<th>Item Type</th>
-		<th>Model Number</th> 
-		<th>ID</th>
+		 <th>Item Type</th>
+		<!-- <th>Model Number</th> 
+		<th>ID</th> -->
 		<th>Student Using</th>
 		<th>Date Checked Out</th>
 		<th>Description</th>
@@ -51,8 +51,8 @@ button#b1 {background-color:blue; color:white; border: 2px solid lightblue; font
 		<tr>
         <td style="text-align:center">  <button type="button">Check in/out</button>  </td>
         <td>{{item.0.category}}</td>
-		<td>{{item.0.model_number}}</td>
-		<td>{{item.0.item_id}}</td>
+		<!--<td>{{item.0.model_number}}</td>
+		<td>{{item.0.item_id}}</td>-->
 		<td>{{item.1.borrower.first_name}} {{item.1.borrower.last_name}}</td>
         <td>{{item.1.checkout_date}}</td>
         <td>{{item.0.description}}</td>
