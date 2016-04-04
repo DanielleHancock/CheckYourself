@@ -31,4 +31,11 @@ def users(request):
 
 
 def checkoutHistory(request):
-    return HttpResponse("<html><b>This will be the checkout history page</b></html>")
+    checkouts = {checkout.item.item_id: checkout for checkout in Checkout.objects.all()}
+
+    items = []
+    for item in Item.objects.all().order_by('category'):
+        checkout = checkouts.get(item.item_id)
+        items.append((item, checkout))
+
+    return render(request, 'checkout/checkoutHistory.html', {'items': items})
