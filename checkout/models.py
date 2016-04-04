@@ -7,15 +7,13 @@ class User(models.Model):
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=40)
     email = models.EmailField(max_length=40)
-    ADMIN = 'ADMIN'
     STAFF = 'STAFF'
     STUDENT = 'STUDENT'
     USER_TYPE_CHOICES = (
-        (ADMIN, 'Admin'),
         (STAFF, 'Staff'),
         (STUDENT, 'Student')
         )
-    models.CharField(max_length=7,
+    user_type = models.CharField(max_length=7,
                      choices=USER_TYPE_CHOICES,
                      default=STUDENT)
     
