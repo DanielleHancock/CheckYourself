@@ -11,15 +11,11 @@ button#b1 {background-color:blue; color:white; border: 2px solid lightblue; font
 </head>
 <body>
    
-	<button id="b1" style="opacity:.25"> Items</button>
-	
-	<form action="{%url 'checkout.views.students' %}" method="get">
-		<button id="b1"> Students</button>
+	<form action="{%url 'checkout.views.items' %}" method="get">
+		<button id="b1"> Items</button>
 	</form>
 	
-	<form action="{%url 'checkout.views.users' %}" method="get">
-		<button id="b1"> Users</button>
-	</form>
+	<button id="b1" style="opacity:.25"> Students</button>
 	
 	<form action="{%url 'checkout.views.checkoutHistory' %}" method="get">
 		<button id="b1"> History</button> 
