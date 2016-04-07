@@ -25,10 +25,10 @@ class Item(models.Model):
     item_id = models.AutoField(primary_key=True)
     checked_out = models.BooleanField(default=False)
     serial_number = models.CharField(max_length=20) # check whether this is right
-    model_number = models.CharField(max_length=50)
+    model_number = models.CharField(max_length=50, blank=True, null=True)
     purchase_date = models.DateField('date purchased')
     category = models.CharField(max_length=20)
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
 
