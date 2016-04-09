@@ -13,13 +13,14 @@ button#b1 {background-color:blue; color:white; border: 2px solid lightblue; font
    
 	<button id="b1" style="opacity:.25"> Items</button>
 	
-	<form action="{%url 'checkout.views.students' %}" method="get">
+	<form action="{%url 'students' %}" method="get">
 		<button id="b1"> Students</button>
 	</form>
 	
-	<form action="{%url 'checkout.views.checkoutHistory' %}" method="get">
-		<button id="b1"> History</button> 
+	<form action="{%url 'checkoutHistory' %}" method="get">
+		<button id="b1"> History</button>
 	</form>
+
 	
 	<form action="{%url 'admin:checkout_item_add' %}" method="get">
 		<button style="float:left; margin-left: 50px; margin-top:22px; padding:5px">Add Item</button>
@@ -36,7 +37,7 @@ button#b1 {background-color:blue; color:white; border: 2px solid lightblue; font
 		<th>Check in/out</th>
 		 <th>Item Type</th>
 		 <th>Model</th>
-		<!--<th>Kit #</th> -->
+		<th>Kit #</th>
 		<th>Student Using</th>
 		<th>Date Checked Out</th>
 		<th>Description</th>
@@ -45,10 +46,10 @@ button#b1 {background-color:blue; color:white; border: 2px solid lightblue; font
           
         {% for item in items %}
 		<tr>
-        <td style="text-align:center">  <button type="button">Check in/out</button>  </td>
+        <td  style="text-align:center">  <form {%if item.1 != None %}action="{%url 'checkin' checkout_id=item.1.pk%}" method="post"{% endif %}>{% csrf_token %}<button type="button submit">Check in/out</button></form>  </td>
         <td>{{item.0.category}}</td>
 		<td>{{item.0.model_number}}</td>
-		<!--<td>{{item.0.kit_num}}</td>-->
+		<td>{{item.0.kit_number}}</td>
 		<td>{{item.1.borrower.first_name}} {{item.1.borrower.last_name}}</td>
         <td>{{item.1.checkout_date}}</td>
         <td>{{item.0.description}}</td>

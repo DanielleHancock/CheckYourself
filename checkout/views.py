@@ -20,6 +20,15 @@ def items(request):
     return render(request, 'checkout/listItems.html', {'items': items})
 
 
+def checkin(request, checkout_id):
+    checkout_object = Checkout.objects.get(pk=checkout_id)
+    checkout_object.checkin_date = timezone.now()
+    checkout_object.item.checked_out = False
+    checkout_object.save()
+    print("checkin")
+    return HttpResponse(status=204)
+
+
 def students(request):
     student_list = [student for student in User.objects.filter(user_type="STUDENT")]
     print(student for student in student_list)

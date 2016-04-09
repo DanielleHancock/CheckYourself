@@ -23,6 +23,7 @@ class User(models.Model):
     
 class Item(models.Model):
     item_id = models.AutoField(primary_key=True)
+    kit_number = models.IntegerField(null=True)
     checked_out = models.BooleanField(default=False)
     serial_number = models.CharField(max_length=20) # check whether this is right
     model_number = models.CharField(max_length=50, blank=True, null=True)
