@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Item, User, Checkout
+from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponse
 # Create your views here.
@@ -8,7 +9,7 @@ from django.http import HttpResponse
 def index(request):
     return render(request, 'checkout/index.html', {})
 
-
+@login_required
 def items(request):
     checkouts = {checkout.item.item_id: checkout for checkout in Checkout.objects.filter(checkin_date__isnull=True)}
 
