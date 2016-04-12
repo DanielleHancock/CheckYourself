@@ -41,11 +41,15 @@ def users(request):
 
 
 def checkoutHistory(request):
-    checkouts = {checkout.item.item_id: checkout for checkout in Checkout.objects.all()}
-
+    checkoutsItem = {checkout.item.item_id: checkout for checkout in Checkout.objects.all()}
+    
+    checkouts = Checkout.objects.all()
+    #checkout = []
+    #for checkout in Checkout.objects.all().order_by('checkout_date'):
+    #checkOut = checkouts.get(item.item_id)
     items = []
     for item in Item.objects.all().order_by('category'):
-        checkout = checkouts.get(item.item_id)
+        checkout = checkoutsItem.get(item.item_id)
         items.append((item, checkout))
-
-    return render(request, 'checkout/checkoutHistory.html', {'items': items})
+    
+    return render(request, 'checkout/checkoutHistory.html',{'checkouts': checkouts})
