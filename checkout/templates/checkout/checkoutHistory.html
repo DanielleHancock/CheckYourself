@@ -1,67 +1,66 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            body {background-color:lightblue;}
-            td {padding: 5px; border:1px solid black; font-family: verdana}
-            th {padding: 5px; border:1px solid black; font-family: verdana; background-color:lightgrey}
-            button#b1 {background-color:blue; color:white; border: 2px solid lightblue; font-family: verdana; font-size: 18px; width: 100px; height: 50px; float: left; border-radius: 8px; margin-bottom:20px; margin-top: 10px}
-            
-            </style>
+        <link rel="stylesheet" href="../../static/style.css">
     </head>
     <body>
         
-        <button id="b1" style="opacity:.25"> Items</button>
-        
-        <form action="{%url 'students' %}" method="get">
-            <button id="b1"> Students</button>
-        </form>
-        
-        
-        <form action="{%url 'checkoutHistory' %}" method="get">
-            <button id="b1"> History</button>
-        </form>
-        
-        <form action="{%url 'admin:index' %}" method="get">
-            <button style="float:left; margin-left: 50px; margin-top:22px; padding:5px">Add Item</button>
-        </form>
-        
-        <input type="search" style="float:left; margin-left: 50px; margin-top:27px; width:20%" placeholder="search">
+       <header>
+            <logo>{% include 'checkout/logo.html' %}</logo><!--
+            --><buffer></buffer><!--
+            --><navigation>
+                {% include 'checkout/navigation.html' with active="checkoutHistory" %}
+            </navigation><!--
+            --><input id="searchbar" type="search" placeholder="search"><!--
+            --><form id="logoutButton" action="{%url 'logout' %}">
+                <button id="logoutButton">Log Out</button>
+            </form>
+        </header>
             
-            <button type="button" style="float:right; margin-right: 20px; margin-top: 22px; padding:5px">Log Out</button>
+        
+        <table id="table">
             
-            
-            <table style="border: 3px solid blue; border-collapse: collapse; background-color:white; width:100%">
-                
+            <thead>
                 <tr>
-                    <th>Item Type</th>
+                    <td>Item Type</td>
                     <!-- <th>Model Number</th>
                      <th>ID</th> -->
-                    <th>Student Using</th>
-                    <th>Date Checked Out</th>
-                    <th>Date Checked In</th>
-                    <th>Description</th>
-                    <th>Serial Number</th>
+                    <td>Student Using</td>
+                    <td>Date Checked Out</td>
+                    <td>Date Checked In</td>
+                    <td>Description</td>
+                    <td>Serial Number</td>
                 </tr>
-                
+            </thead>
+            
+            
+            <tbody>
                 {% for checkout in checkouts %}
-                
-                <tr>
+                <tr>   
                     <td>{{checkout.item}}</td>
                     <td>{{checkout.borrower}}</td>
                     <td>{{checkout.checkout_date}}</td>
                     <td>{{checkout.checkin_date}}</td>
                     <td>{{checkout.item.description}}</td>
                     <td>{{checkout.item.serial_number}}</td>
-                    
-               
-               {% endfor %}
                 </tr>
-                
-                
-                
-                
-            </table>
+                {% endfor %}
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </tfoot>            
+            
+            
+            
+        </table>
             
             
             

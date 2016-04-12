@@ -1,0 +1,13 @@
+<ul>	
+	<li {% if active = "items" %} class="active" {% endif %}>
+		<a href="{% url 'items' %}"> Items </a>
+	</li>
+	
+	<li {% if active = "students" %} class="active" {% endif %}>
+		<a href="{% url 'students' %}"> Students </a>
+	</li>
+	
+	<li {% if active = "checkoutHistory" %} class="active" {% endif %}>
+		<a href="{% url 'checkoutHistory' %}"> History </a>
+	</li>
+</ul>
