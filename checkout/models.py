@@ -16,6 +16,8 @@ class User(models.Model):
     user_type = models.CharField(max_length=7,
                      choices=USER_TYPE_CHOICES,
                      default=STUDENT)
+    def __str__(self):
+        return self.first_name
     
     #leaving out password for now
     #to add new Item:
@@ -46,3 +48,6 @@ class Checkout(models.Model): #by not specifying a primary key, django will crea
     authorizer = models.ForeignKey(User,related_name='authorizer',null=True,on_delete=models.SET_NULL)
     checkout_date = models.DateField('checkout date')
     checkin_date = models.DateField('checkin date',null=True,blank=True)
+    
+    def __str__(self):
+        return str(self.checkout_date)
