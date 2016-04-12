@@ -11,16 +11,16 @@
     </head>
     <body>
         
-        <button id="b1" style="opacity:.25"> Items</button>
+        <form action="{%url 'items' %}" method="get">
+            <button id="b1"> Items</button>
+        </form>
         
         <form action="{%url 'students' %}" method="get">
             <button id="b1"> Students</button>
         </form>
+       
         
-        
-        <form action="{%url 'checkoutHistory' %}" method="get">
-            <button id="b1"> History</button>
-        </form>
+        <button id="b1" style="opacity:.25"> History</button>
         
         <form action="{%url 'admin:index' %}" method="get">
             <button style="float:left; margin-left: 50px; margin-top:22px; padding:5px">Add Item</button>
