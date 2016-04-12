@@ -1,66 +1,82 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-body {background-color:lightblue;}
-td {padding: 5px; border:1px solid black; font-family: verdana}
-th {padding: 5px; border:1px solid black; font-family: verdana; background-color:lightgrey}
-button#b1 {background-color:blue; color:white; border: 2px solid lightblue; font-family: verdana; font-size: 18px; width: 100px; height: 50px; float: left; border-radius: 8px; margin-bottom:20px; margin-top: 10px}
-
-</style>
-</head>
-<body>
-  
-	<form action="{%url 'checkout.views.items' %}" method="get">
-		<button id="b1"> Items</button> 
-	</form>
-	
-	<form action="{%url 'checkout.views.students' %}" method="get">
-		<button id="b1"> Students</button>
-	</form>
-	
-	<button id="b1" style="opacity:.25"> History</button>
-	
-	<form action="{%url 'admin:checkout_item_add' %}" method="get">
-		<button style="float:left; margin-left: 50px; margin-top:22px; padding:5px">Add Item</button>
-	</form>
-	
-	<input type="search" style="float:left; margin-left: 50px; margin-top:27px; width:20%" placeholder="search">
-	
-	<button type="button" style="float:right; margin-right: 20px; margin-top: 22px; padding:5px">Log Out</button>
-
-
-	<table style="border: 3px solid blue; border-collapse: collapse; background-color:white; width:100%">
-
-	<tr>
-		 <th>Item Type</th>
-		 <th>Model</th>
-		<!--<th>Kit #</th> -->
-		<th>Student Using</th>
-		<th>Date Checked Out</th>
-		<th>Date Checked In</th>
-		<th>Description</th>
-		<th>Serial Number</th>
-	</tr>
-
-		{% for item in items %}
-		<tr>
-			<td>{{item.0.category}}</td>
-			<td>{{item.0.model_number}}</td>
-			<!--<td>{{item.0.kit_num}}</td>-->
-			<td>{{item.1.borrower.first_name}} {{item.1.borrower.last_name}}</td>
-			<td>{{item.1.checkout_date}}</td>
-			<td>{{item.1.checkin_date}}</td>
-			<td>{{item.0.description}}</td>
-			<td>{{item.0.serial_number}}</td>
-       </tr>
-       {% endfor %}
-
-
-
-	</table>
-
-
-
-</body>
+    <head>
+        <style>
+            body {background-color:lightblue;}
+            td {padding: 5px; border:1px solid black; font-family: verdana}
+            th {padding: 5px; border:1px solid black; font-family: verdana; background-color:lightgrey}
+            button#b1 {background-color:blue; color:white; border: 2px solid lightblue; font-family: verdana; font-size: 18px; width: 100px; height: 50px; float: left; border-radius: 8px; margin-bottom:20px; margin-top: 10px}
+            
+            </style>
+    </head>
+    <body>
+        
+        <button id="b1" style="opacity:.25"> Items</button>
+        
+        <form action="{%url 'students' %}" method="get">
+            <button id="b1"> Students</button>
+        </form>
+        
+        <form action="{%url 'users' %}" method="get">
+            <button id="b1"> Users</button>
+        </form>
+        
+        <form action="{%url 'checkoutHistory' %}" method="get">
+            <button id="b1"> History</button>
+        </form>
+        
+        <form action="{%url 'admin:index' %}" method="get">
+            <button style="float:left; margin-left: 50px; margin-top:22px; padding:5px">Add Item</button>
+        </form>
+        
+        <input type="search" style="float:left; margin-left: 50px; margin-top:27px; width:20%" placeholder="search">
+            
+            <button type="button" style="float:right; margin-right: 20px; margin-top: 22px; padding:5px">Log Out</button>
+            
+            
+            <table style="border: 3px solid blue; border-collapse: collapse; background-color:white; width:100%">
+                
+                <tr>
+                    <th>Item Type</th>
+                    <!-- <th>Model Number</th>
+                     <th>ID</th> -->
+                    <th>Student Using</th>
+                    <th>Date Checked Out</th>
+                    <th>Date Checked In</th>
+                    <th>Description</th>
+                    <th>Serial Number</th>
+                </tr>
+                
+                {% for checkout in checkouts %}
+                
+                <tr>
+                    <td>{{checkout.item}}</td>
+                    <td>{{checkout.borrower}}</td>
+                    <td>{{checkout.checkout_date}}</td>
+                    <td>{{checkout.checkin_date}}</td>
+                    
+                {% endfor %}
+                {%for item in items %}
+                    
+                    <td>{{item.0.description}}</td>
+                    <td>{{item.0.serial_number}}</td>
+                    
+                    <!--<td>{{item.0.category}}</td>
+                     <!--<td>{{item.0.model_number}}</td>
+                     <td>{{item.0.item_id}}</td>
+                     <td>{{item.1.borrower.first_name}} {{item.1.borrower.last_name}}</td>
+                     <td>{{item.1.checkout_date}}</td>
+                     <td>{{item.1.checkin_date}}</td>
+                     <td>{{item.0.description}}</td>
+                     <td>{{item.0.serial_number}}</td>-->
+                </tr>
+                {% endfor %}
+                
+                
+                
+            </table>
+            
+            
+            
+    </body>
 </html>
