@@ -43,7 +43,7 @@ def users(request):
 def checkoutHistory(request):
   
     
-    checkouts = Checkout.objects.all()
+    checkouts = Checkout.objects.all().order_by('checkout_date')
    
     
     return render(request, 'checkout/checkoutHistory.html',{'checkouts': checkouts})
