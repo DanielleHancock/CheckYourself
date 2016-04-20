@@ -41,15 +41,16 @@ def students(request):
 def users(request):
     return HttpResponse("<html><b>This will be the users page")
 
-
 def checkoutHistory(request):
   
-    
-    checkouts = Checkout.objects.all().order_by('checkout_date')
-   
+    if (request.GET.get('mybtn')):
+        checkouts = Checkout.objects.all().order_by('-checkout_date')
+        return render(request, 'checkout/checkoutHistory.html', {'checkouts': checkouts})
+    else :
+        checkouts = Checkout.objects.all().order_by('checkout_date')
     
     return render(request, 'checkout/checkoutHistory.html',{'checkouts': checkouts})
-    
+
 # code from http://julienphalip.com/post/2825034077/adding-search-to-a-django-site-in-a-snap
 def normalize_query(query_string, findterms=re.compile(r'"([^"]+)"|(\S+)').findall, normspace=re.compile(r'\s{2,}').sub):
     ''' Splits the query string in individual keywords, getting rid of unnecessary spaces

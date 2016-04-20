@@ -15,6 +15,11 @@
             --><form id="logoutButton" action="{%url 'logout' %}">
                 <button id="logoutButton">Log Out</button>
             </form>
+             <form action="#" method="get">
+                <input type="submit" value="Sort by Newest Date" name="mybtn">
+            <form id="descendBotton" action= "{% url 'checkoutHistory' %}" >
+                <button id="descendButton">Sort by Oldest Date</button>
+            </form>
         </header>
         
         <table id="table">
