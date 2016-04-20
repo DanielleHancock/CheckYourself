@@ -23,6 +23,10 @@
             </form>
         </header>
 	    
+        {% if found_entries %}
+        
+        <p>Search results for "{{query_string}}":</p>
+        
 		<table id="table">
 		
 			<thead> 
@@ -37,9 +41,9 @@
 					<td>Serial Number</td>
 				</tr>
 			</thead>
-	          
+            
 	        <tbody>  
-		        {% for item in items %}
+		        {% for item in found_entries %}
 
 				<tr>
 			        <td  style="text-align:center">  <form {%if item.1 != None %}action="{%url 'checkin' checkout_id=item.1.pk%}" method="post"{% endif %}>{% csrf_token %}<button type="button submit">Check in/out</button></form>  </td>
@@ -68,7 +72,10 @@
             </tfoot> 
 	    
 		</table>
-	   
+       
+       {% else %}
+       <p>Sorry, no entries matching "{{query_string}}" were found. (Please note that dates should be entered in the form yyyy-mm-dd.)</p>
+       {% endif%}
 
 
 	</body>

@@ -25,7 +25,7 @@ class User(models.Model):
     
 class Item(models.Model):
     item_id = models.AutoField(primary_key=True)
-    kit_number = models.IntegerField(null=True)
+    kit_number = models.IntegerField(blank=True, null=True)
     checked_out = models.BooleanField(default=False)
     serial_number = models.CharField(max_length=20) # check whether this is right
     model_number = models.CharField(max_length=50, blank=True, null=True)
@@ -51,3 +51,4 @@ class Checkout(models.Model): #by not specifying a primary key, django will crea
     
     def __str__(self):
         return str(self.checkout_date)
+        

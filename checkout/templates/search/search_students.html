@@ -11,7 +11,7 @@
   			--><navigation>
                 {% include 'checkout/navigation.html' with active="students" %}
             </navigation><!--
-            --><form id="searchbar" action="/checkout/search_students" method="get">
+  			--><form id="searchbar" action="/checkout/search_students" method="get">
                     <input type="search" name="q" placeholder="search">
             </form><!--
   			--><form id="logoutButton" action="{%url 'logout' %}">
@@ -19,6 +19,10 @@
             </form>
         </header>
 	    
+        {% if students %}
+        
+        <p>Search results for "{{query_string}}":</p>
+        
 		<table id="table">
 		
 			<thead>
@@ -48,7 +52,9 @@
             </tfoot> 
 	    
 		</table>
-	   
+       {% else %}
+       <p>Sorry, no entries matching "{{query_string}}" were found.</p>
+       {% endif%}	   
 
 
 	</body>

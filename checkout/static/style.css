@@ -22,6 +22,10 @@ body {
    font-family: 'Open Sans', sans-serif;  
 }
 
+p {
+    margin-left: 20px
+}
+
 button {
 	font-family: 'Open Sans', sans-serif;
 }
@@ -120,7 +124,7 @@ navigation {
 	display: inline-block;
 }
 
-input#searchbar {
+form#searchbar {
 	width: 15%;
 	display: inline-block;
 }
