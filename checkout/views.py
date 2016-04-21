@@ -123,7 +123,7 @@ def search_students(request):
     if ('q' in request.GET) and request.GET['q'].strip():
         query_string = request.GET['q']
         
-        entry_query = get_query(query_string, ['first_name', 'last_name', 'user_id', 'email'])
+        entry_query = get_query(query_string, ['first_name', 'last_name', 'student_id', 'email'])
         
         found_entries = User.objects.filter(entry_query).filter(user_type="STUDENT")
 

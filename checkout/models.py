@@ -4,6 +4,7 @@ from django.utils import timezone
 
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
+    student_id = models.CharField(max_length=8)
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=40)
     email = models.EmailField(max_length=40)
