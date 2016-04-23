@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^checkin/(?P<checkout_id>[0-9]+)/$', views.checkin, name='checkin'),
     url(r'^search_items', views.search_items, name='search_items'),
     url(r'^search_students', views.search_students, name='search_students'),
+    url(r'^search_history', views.search_history, name='search_history')
     
 ]
 #

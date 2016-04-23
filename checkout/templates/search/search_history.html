@@ -11,18 +11,17 @@
             --><navigation>
                 {% include 'checkout/navigation.html' with active="checkoutHistory" %}
             </navigation><!--
-             --><form id="searchbar" action="/checkout/search_history" method="get">
+            --><form id="searchbar" action="/checkout/search_history" method="get">
                     <input type="search" name="q" placeholder="search">
                 </form><!--
             --><form id="logoutButton" action="{%url 'logout' %}">
                 <button id="logoutButton">Log Out</button>
             </form>
-             <form action="#" method="get">
-                <input type="submit" value="Sort by Newest Date" name="mybtn">
-            <form id="descendBotton" action= "{% url 'checkoutHistory' %}" >
-                <button id="descendButton">Sort by Oldest Date</button>
-            </form>
         </header>
+        
+        {% if found_entries %}
+        
+        <p>Search results for "{{query_string}}":</p>
         
         <table id="table">
             
@@ -43,7 +42,7 @@
             
             
             <tbody>
-                {% for checkout in checkouts %}
+                {% for checkout in found_entries %}
                 <tr>   
                     <td>{{checkout.item}}</td>
                     <td>{{checkout.item.model_number}}</td>
@@ -76,7 +75,10 @@
             
         </table>
             
-            
+       {% else %}
+       <p>Sorry, no entries matching "{{query_string}}" were found. (Please note that dates should be entered in the form yyyy-mm-dd.)</p>
+       {% endif%}
+
             
     </body>
 </html>

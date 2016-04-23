@@ -128,4 +128,17 @@ def search_students(request):
         found_entries = User.objects.filter(entry_query).filter(user_type="STUDENT")
 
     return render(request, 'search/search_students.html',
-                          { 'query_string': query_string, 'students': found_entries },)                            
+                          { 'query_string': query_string, 'students': found_entries },)    
+
+def search_history(request):
+    query_string = ''
+    found_entries = None
+    if ('q' in request.GET) and request.GET['q'].strip():
+        query_string = request.GET['q']
+        
+        entry_query = get_query(query_string, ['item__category', 'borrower__first_name', 'borrower__last_name', 'authorizer__first_name', 'authorizer__last_name', 'checkin_date', 'checkout_date', 'item__serial_number', 'item__description', 'item__model_number', 'item__kit_number'])
+        
+        found_entries = Checkout.objects.filter(entry_query)
+
+    return render(request, 'search/search_history.html',
+                          { 'query_string': query_string, 'found_entries': found_entries },)                           
