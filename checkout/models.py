@@ -3,22 +3,12 @@ from django.utils import timezone
 # Create your models here.
 
 class User(models.Model):
-    user_id = models.AutoField(primary_key=True)
-    student_id = models.CharField(max_length=8)
+    student_id = models.CharField(max_length=8,primary_key=True)
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=40)
     email = models.EmailField(max_length=40)
-    STAFF = 'STAFF'
-    STUDENT = 'STUDENT'
-    USER_TYPE_CHOICES = (
-        (STAFF, 'Staff'),
-        (STUDENT, 'Student')
-        )
-    user_type = models.CharField(max_length=7,
-                     choices=USER_TYPE_CHOICES,
-                     default=STUDENT)
     def __str__(self):
-        return self.first_name
+        return self.first_name+" "+self.last_name+": "+str(self.student_id)
     
     #leaving out password for now
     #to add new Item:

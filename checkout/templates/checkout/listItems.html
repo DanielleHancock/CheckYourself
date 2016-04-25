@@ -47,6 +47,7 @@
 										{%else%}			<form action="{%url 'checkout' item_id=item.0.item_id %}"
 																  method="get"><button type = "button submit"> Check out</button>{% csrf_token %}</form>
 										{%endif%}</td>
+					<td>{{item.0.category}}</td>
 					<td>{{item.0.model_number}}</td>
 					<td>{{item.0.kit_number}}</td>
 					<td>{{item.1.borrower.first_name}} {{item.1.borrower.last_name}}</td>

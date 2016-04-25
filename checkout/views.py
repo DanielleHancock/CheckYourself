@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.utils import timezone
 from .models import Item, User, Checkout
 from django.contrib.auth.decorators import login_required
@@ -32,9 +32,8 @@ def othercheckout(request, item_id):
             data = form.cleaned_data
             print(data['user_id'])
             model_instance = data['user_id']
-        checkout_instance = Checkout(item=Item.objects.get(item_id=item_id), borrower=model_instance,
-                                     authorizer=model_instance, checkout_date=timezone.now())
-        checkout_instance.save()
+            checkout_instance = Checkout(item=Item.objects.get(item_id=item_id), borrower=model_instance,authorizer=model_instance, checkout_date=timezone.now())
+            checkout_instance.save()
         return redirect('items')
     return redirect('items')
 
@@ -66,7 +65,7 @@ def checkin(request, checkout_id):
     checkout_object.item.checked_out = False
     checkout_object.save()
     print("checkin")
-    return HttpResponse(status=204)
+    return redirect('items')
 
 
 def students(request):
