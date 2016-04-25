@@ -4,6 +4,9 @@ from .models import Item, User, Checkout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 import re
+from .forms import CheckoutForm
+from .forms import OtherCheckoutForm
+from django.http import HttpResponse
 
 from django.http import HttpResponse
 # Create your views here.
@@ -21,6 +24,40 @@ def items(request):
         items.append((item, checkout))
 
     return render(request, 'checkout/listItems.html', {'items': items})
+
+def othercheckout(request, item_id):
+    if request.method == 'POST':
+        form = OtherCheckoutForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            print(data['user_id'])
+            model_instance = data['user_id']
+        checkout_instance = Checkout(item=Item.objects.get(item_id=item_id), borrower=model_instance,
+                                     authorizer=model_instance, checkout_date=timezone.now())
+        checkout_instance.save()
+        return redirect('items')
+    return redirect('items')
+
+
+def checkout(request, item_id):
+    if request.method == 'POST':
+        form = CheckoutForm(request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
+
+            model_instance = form.save()
+            model_instance.save()
+            checkout_instance = Checkout(item=Item.objects.get(item_id=int(data['item_id'])), borrower=model_instance,
+                                         authorizer=model_instance, checkout_date=timezone.now())
+
+            checkout_instance.save()
+            return redirect('items')
+        return redirect('items')
+    else:
+        form = CheckoutForm()
+        form2 = OtherCheckoutForm()
+        return render(request, 'checkout/checkout.html', {'form': form, 'form2': form2, 'item_id': item_id})
 
 
 def checkin(request, checkout_id):
