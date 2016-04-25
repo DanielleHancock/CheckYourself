@@ -69,7 +69,7 @@ def checkin(request, checkout_id):
 
 
 def students(request):
-    student_list = [student for student in User.objects.filter(user_type="STUDENT")]
+    student_list = [student for student in User.objects.all()]
     print(student for student in student_list)
     return render(request, 'checkout/listStudents.html', {'students': student_list})
 
@@ -161,7 +161,7 @@ def search_students(request):
         
         entry_query = get_query(query_string, ['first_name', 'last_name', 'student_id', 'email'])
         
-        found_entries = User.objects.filter(entry_query).filter(user_type="STUDENT")
+        found_entries = User.objects.filter(entry_query)
 
     return render(request, 'search/search_students.html',
                           { 'query_string': query_string, 'students': found_entries },)    
