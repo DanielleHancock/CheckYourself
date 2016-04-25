@@ -42,8 +42,11 @@
 		        {% for item in items %}
 
 				<tr>
-			        <td  style="text-align:center">  <form {%if item.1 != None %}action="{%url 'checkin' checkout_id=item.1.pk%}" method="post"{% endif %}>{% csrf_token %}<button type="button submit">Check in/out</button></form>  </td>
-			        <td>{{item.0.category}}</td>
+			        <td  style="text-align:center"> {%if item.1 != None %}<form  action="{%url 'checkin' checkout_id=item.1.pk%}"
+																				  method="post"><button type="button submit">Check in</button>{% csrf_token %}</form>
+										{%else%}			<form action="{%url 'checkout' item_id=item.0.item_id %}"
+																  method="get"><button type = "button submit"> Check out</button>{% csrf_token %}</form>
+										{%endif%}</td>
 					<td>{{item.0.model_number}}</td>
 					<td>{{item.0.kit_number}}</td>
 					<td>{{item.1.borrower.first_name}} {{item.1.borrower.last_name}}</td>
