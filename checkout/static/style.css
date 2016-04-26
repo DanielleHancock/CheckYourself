@@ -1,9 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
+@import url(https://fonts.googleapis.com/css?family=Oleo+Script:400,700);
 
 body {
 	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
 	background-color:#caf0f0;
 	margin: 0px;
+}
+
+#hello {
+	background-color:#caf0f0;
 }
 
 ::-webkit-input-placeholder {
@@ -20,6 +26,66 @@ body {
 
 :-ms-input-placeholder {  
    font-family: 'Open Sans', sans-serif;  
+}
+
+#splashPage {
+	position: relative;
+	top: 200px;
+	width: 410px;
+	margin: 0 auto;
+}
+
+#loginPage {
+	position: relative;
+	top: 200px;
+	width: 306px;
+	margin: 0 auto;
+}
+
+#checkoutBody {
+	position: relative;
+	top: 200px;
+	width: 306px;
+	margin: 0 auto;
+}
+
+#title {
+	
+	
+	font-family: 'Oleo Script';
+	font-weight: 400;
+	font-size: 72px;
+	color: #87b2b2;
+	text-shadow: 1px 1px 5px black;
+}
+
+#smallTitle {
+	
+	
+	font-family: 'Oleo Script';
+	font-weight: 400;
+	font-size: 40px;
+	color: #87b2b2;
+	text-shadow: 1px 1px 5px black;
+}
+
+
+#loginButton {
+	position: relative;
+	display: block;
+	width: 50px;
+	top: 20px;
+	margin: 0 auto;
+  border-radius: 10px;
+  color: #87b2b2;
+  background: #f5f5f5;
+  padding: 10px 100px 10px 100px;
+  text-decoration: none;
+}
+
+#loginButton:hover {
+  background: #ffffff;
+  text-decoration: none;
 }
 
 p {
@@ -100,39 +166,118 @@ li.active a{
 
 header {
 	background-color: #ffffff;
-	padding: 30px 10px 10px 10px;
+	padding: 20px 10px 10px 10px;
 	border-bottom: 1px solid lightgrey;
+	box-shadow: 0px 3px 5px lightgrey;
 }
 
 logo {
 	width: 10%;
 	display: inline-block;
+	font-family: 'Oleo Script';
+	font-weight: 400;
+	font-size: 30px;
+	color: #87b2b2;
+}
+
+#home {
+	color: #87b2b2;
 }
 
 buffer {
-	width: 55%;
+	width: calc(90% - 448px);
 	display: inline-block;
 	direction: rtl;
 }
 
-form#addItem {
+#ascend {
+	display: inline-block;
+	padding-right: 20px;
+}
+
+#descend {
+	display: inline-block;
+
+}
+
+#addItem {
 	padding-right: 20px;
 }
 
 navigation {
-	width: 15%;
+	width:165px;
 	display: inline-block;
 }
 
-form#searchbar {
-	width: 15%;
+#searchbar {
+	width: 133px;
 	display: inline-block;
 }
 
-form#logoutButton {
-	width: 5%;
+#accountMenu {
+	padding: 10px 10px 10px 10px;
+	cursor: pointer;
+
+}
+
+#firstName {
+	text-overflow: ellipsis;
+    max-width: 85px;
+    overflow: hidden;
+    display: inline-block;
+    direction: ltr;
+    top: 4px;
+    position: relative;
+}
+
+#dropdownParent {
+	position:relative;
 	display: inline-block;
+	width: 150px;
 	direction: rtl;
+}
+
+#dropdownParent:hover > #dropdown{
+	display: block;
+}
+
+#dropdown {
+	position: absolute;
+	display: none;
+	background-color: white;
+	width: 125px;
+	padding: 10px 10px 10px 10px;
+	/*margin-top: 17px;*/
+/*    border-left: 1px lightgrey solid;
+    border-bottom: 1px lightgrey solid;
+    border-right: 1px lightgrey solid;*/
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+
+
+#accountMenu:hover {
+	color: #9fd2d2;
+}
+
+#accountMenu:hover > #arrowDown{
+	border-top: 4px solid #9fd2d2;
+}
+
+#arrowDown {
+	width: 0; 
+	height: 0; 
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 4px solid #000;
+	position: relative;
+    top: 13px;
+    left: 2px;
+}
+
+#logoutButton:hover {
+	color: #9fd2d2;
 }
 
 

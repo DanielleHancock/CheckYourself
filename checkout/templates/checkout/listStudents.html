@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Students</title>
 		<link rel="stylesheet" href="../../static/style.css">
 	</head>
 	<body>
@@ -14,9 +15,7 @@
             --><form id="searchbar" action="/checkout/search_students" method="get">
                     <input type="search" name="q" placeholder="search">
             </form><!--
-  			--><form id="logoutButton" action="{%url 'logout' %}">
-                <button id="logoutButton">Log Out</button>
-            </form>
+  			-->{% include 'checkout/userAccount.html' %}
         </header>
 	    
 		<table id="table">

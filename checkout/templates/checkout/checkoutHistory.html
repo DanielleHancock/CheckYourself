@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Checkout History</title>
         <link rel="stylesheet" href="../../static/style.css">
     </head>
     <body>
         
        <header>
             <logo>{% include 'checkout/logo.html' %}</logo><!--
-            --><buffer></buffer><!--
+            --><buffer>
+                <form id="ascend" action="#" method="get">
+                    <input type="submit" value="Sort by Newest Date" name="mybtn">
+                </form>
+                <form id="descend" action= "{% url 'checkoutHistory' %}" >
+                    <button id="descendButton">Sort by Oldest Date</button>
+                </form>
+            </buffer><!--
             --><navigation>
                 {% include 'checkout/navigation.html' with active="checkoutHistory" %}
             </navigation><!--
              --><form id="searchbar" action="/checkout/search_history" method="get">
                     <input type="search" name="q" placeholder="search">
                 </form><!--
-            --><form id="logoutButton" action="{%url 'logout' %}">
-                <button id="logoutButton">Log Out</button>
-            </form>
-             <form action="#" method="get">
-                <input type="submit" value="Sort by Newest Date" name="mybtn">
-            <form id="descendBotton" action= "{% url 'checkoutHistory' %}" >
-                <button id="descendButton">Sort by Oldest Date</button>
-            </form>
+            -->{% include 'checkout/userAccount.html' %}
+             
         </header>
         
         <table id="table">

@@ -8,7 +8,6 @@ from .forms import CheckoutForm
 from .forms import OtherCheckoutForm
 from django.http import HttpResponse
 
-from django.http import HttpResponse
 # Create your views here.
 
 def index(request):
@@ -23,7 +22,11 @@ def items(request):
         checkout = checkouts.get(item.item_id)
         items.append((item, checkout))
 
-    return render(request, 'checkout/listItems.html', {'items': items})
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
+
+    return render(request, 'checkout/listItems.html', {'items': items, 'username': username})
 
 def othercheckout(request, item_id):
     if request.method == 'POST':
@@ -71,21 +74,26 @@ def checkin(request, checkout_id):
 def students(request):
     student_list = [student for student in User.objects.all()]
     print(student for student in student_list)
-    return render(request, 'checkout/listStudents.html', {'students': student_list})
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
+    return render(request, 'checkout/listStudents.html', {'students': student_list, 'username': username})
 
 
 def users(request):
     return HttpResponse("<html><b>This will be the users page")
 
 def checkoutHistory(request):
-  
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     if (request.GET.get('mybtn')):
         checkouts = Checkout.objects.all().order_by('-checkout_date')
-        return render(request, 'checkout/checkoutHistory.html', {'checkouts': checkouts})
+        return render(request, 'checkout/checkoutHistory.html', {'checkouts': checkouts, 'username': username})
     else :
         checkouts = Checkout.objects.all().order_by('checkout_date')
     
-    return render(request, 'checkout/checkoutHistory.html',{'checkouts': checkouts})
+    return render(request, 'checkout/checkoutHistory.html',{'checkouts': checkouts, 'username': username})
 
 # code from http://julienphalip.com/post/2825034077/adding-search-to-a-django-site-in-a-snap
 def normalize_query(query_string, findterms=re.compile(r'"([^"]+)"|(\S+)').findall, normspace=re.compile(r'\s{2,}').sub):
@@ -123,6 +131,9 @@ def get_query(query_string, search_fields):
   
 # code partially from http://julienphalip.com/post/2825034077/adding-search-to-a-django-site-in-a-snap
 def search_items(request):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     query_string = ''
     found_entries = None
     if ('q' in request.GET) and request.GET['q'].strip():
@@ -150,10 +161,13 @@ def search_items(request):
         all_results.append((item, checkout))
 
     return render(request, 'search/search_items.html',
-                          { 'query_string': query_string, 'found_entries': all_results },) 
+                          { 'query_string': query_string, 'found_entries': all_results, 'username': username },) 
 
 # code partially from http://julienphalip.com/post/2825034077/adding-search-to-a-django-site-in-a-snap
 def search_students(request):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     query_string = ''
     found_entries = None
     if ('q' in request.GET) and request.GET['q'].strip():
@@ -164,9 +178,12 @@ def search_students(request):
         found_entries = User.objects.filter(entry_query)
 
     return render(request, 'search/search_students.html',
-                          { 'query_string': query_string, 'students': found_entries },)    
+                          { 'query_string': query_string, 'students': found_entries, 'username': username },)    
 
 def search_history(request):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user
     query_string = ''
     found_entries = None
     if ('q' in request.GET) and request.GET['q'].strip():
@@ -177,4 +194,4 @@ def search_history(request):
         found_entries = Checkout.objects.filter(entry_query)
 
     return render(request, 'search/search_history.html',
-                          { 'query_string': query_string, 'found_entries': found_entries },)                           
+                          { 'query_string': query_string, 'found_entries': found_entries, 'username': username},)                           

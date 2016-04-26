@@ -18,9 +18,7 @@
             --><form id="searchbar" action="/checkout/search_items" method="get">
                     <input type="search" name="q" placeholder="search">
                 </form><!--
-  			--><form id="logoutButton" action="{%url 'logout' %}">
-                <button id="logoutButton">Log Out</button>
-            </form>
+  			-->{% include 'checkout/userAccount.html' %}
         </header>
 	    
         {% if found_entries %}

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Items</title>
 		<link rel="stylesheet" href="../../static/style.css">
 	</head>
 	<body>
@@ -8,9 +9,11 @@
 		<header>
             <logo>{% include 'checkout/logo.html' %}</logo><!--
   			--><buffer>
-	  				<form target = "_blank" id="addItem" action="{%url 'admin:checkout_item_add' %}" method="get">
-	            		<button>Add Item</button>
-	        		</form>
+  					{% if username.is_staff%}
+  						<form target = "_blank" id="addItem" action="{%url 'admin:checkout_item_add' %}" method="get">
+	            			<button>Add Item</button>
+	        			</form>  
+					{% endif %}
     			</buffer><!--
   			--><navigation>
                 {% include 'checkout/navigation.html' with active="items" %}
@@ -18,9 +21,7 @@
             --><form id="searchbar" action="/checkout/search_items" method="get">
                     <input type="search" name="q" placeholder="search">
                 </form><!--
-  			--><form id="logoutButton" action="{%url 'logout' %}">
-                <button id="logoutButton">Log Out</button>
-            </form>
+  			-->{% include 'checkout/userAccount.html' %}
         </header>
 	    
 		<table id="table">
@@ -42,11 +43,19 @@
 		        {% for item in items %}
 
 				<tr>
-			        <td  style="text-align:center"> {%if item.1 != None %}<form  action="{%url 'checkin' checkout_id=item.1.pk%}"
-																				  method="post"><button type="button submit">Check in</button>{% csrf_token %}</form>
-										{%else%}			<form action="{%url 'checkout' item_id=item.0.item_id %}"
-																  method="get"><button type = "button submit"> Check out</button>{% csrf_token %}</form>
-										{%endif%}</td>
+			        <td  style="text-align:center"> 
+			        	{%if item.1 != None %}
+				        	<form  action="{%url 'checkin' checkout_id=item.1.pk%}" method="post">
+				        		<button type="button submit">Check in</button>
+				        		{% csrf_token %}
+				        	</form>
+						{%else%}			
+							<form action="{%url 'checkout' item_id=item.0.item_id %}" method="get">
+								<button type = "button submit"> Check out</button>
+								{% csrf_token %}
+							</form>
+						{%endif%}
+					</td>
 					<td>{{item.0.category}}</td>
 					<td>{{item.0.model_number}}</td>
 					<td>{{item.0.kit_number}}</td>

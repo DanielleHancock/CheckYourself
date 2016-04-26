@@ -1,5 +1,12 @@
 <html>
-	<b>Hello, world. You are about to be checked out.</b>
-	<form action="http://localhost:8000/checkout/items/">
-	<input type="submit" value="Go to items page">
+	<head>
+		<title>CheckYourself</title>
+		<link rel="stylesheet" href="../../static/style.css">
+	</head>
+	<body>
+		<div id="splashPage">
+			<div id="title">CheckYourself</div>
+			<a id="loginButton" href="{% url 'items' %}"> Log In</a>
+		</div>
+	</body>
 </html>
