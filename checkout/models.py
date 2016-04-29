@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from djang.contrib.auth.models import User as AuthUser
 # Create your models here.
 
 class User(models.Model):
@@ -36,7 +37,7 @@ class Item(models.Model):
 class Checkout(models.Model): #by not specifying a primary key, django will create an autoincrementing field to be the primary key
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     borrower = models.ForeignKey(User,related_name='borrower',null=True,on_delete=models.SET_NULL)
-    authorizer = models.ForeignKey(User,related_name='authorizer',null=True,on_delete=models.SET_NULL)
+    authorizer = models.ForeignKey(AuthUser,related_name='authorizer',null=True,on_delete=models.SET_NULL)
     checkout_date = models.DateField('checkout date')
     checkin_date = models.DateField('checkin date',null=True,blank=True)
     
