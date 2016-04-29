@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from djang.contrib.auth.models import User as AuthUser
+from django.contrib.auth.models import User as AuthUser
 # Create your models here.
 
 class User(models.Model):
