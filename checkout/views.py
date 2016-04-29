@@ -35,7 +35,9 @@ def othercheckout(request, item_id):
             data = form.cleaned_data
             print(data['user_id'])
             model_instance = data['user_id']
-            checkout_instance = Checkout(item=Item.objects.get(item_id=item_id), borrower=model_instance,authorizer=model_instance, checkout_date=timezone.now())
+            if request.user.is_authenticated():
+                auth_user = request.user
+            checkout_instance = Checkout(item=Item.objects.get(item_id=item_id), borrower=model_instance,authorizer=auth_user, checkout_date=timezone.now())
             checkout_instance.save()
         return redirect('items')
     return redirect('items')
@@ -50,8 +52,10 @@ def checkout(request, item_id):
 
             model_instance = form.save()
             model_instance.save()
+            if request.user.is_authenticated():
+                auth_user = request.user
             checkout_instance = Checkout(item=Item.objects.get(item_id=int(data['item_id'])), borrower=model_instance,
-                                         authorizer=model_instance, checkout_date=timezone.now())
+                                         authorizer=auth_user, checkout_date=timezone.now())
 
             checkout_instance.save()
             return redirect('items')
