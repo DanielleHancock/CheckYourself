@@ -8,9 +8,11 @@
 		<header>
             <logo>{% include 'checkout/logo.html' %}</logo><!--
   			--><buffer>
-	  				<form id="addItem" action="{%url 'admin:checkout_item_add' %}" method="get">
-	            		<button>Add Item</button>
-	        		</form>
+	  				{% if username.is_staff%}
+  						<form target = "_blank" id="addItem" action="{%url 'admin:checkout_item_add' %}" method="get">
+	            			<button>Add Item</button>
+	        			</form>  
+					{% endif %}
     			</buffer><!--
   			--><navigation>
                 {% include 'checkout/navigation.html' with active="items" %}
